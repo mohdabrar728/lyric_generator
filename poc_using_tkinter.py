@@ -13,11 +13,16 @@ title = Label(root, text="Music Player", bd=9, relief=GROOVE,
             font=("times new roman", 50, "bold"), bg="white", fg="green")
 title.pack(side=TOP, fill=X)
 
+
+def stop():
+    pygame.mixer.music.stop()
+
 listbox = Listbox(root)
 for i in range(len(song_list)):
     listbox.insert(i+1, song_list[i][:-4])
 unpicked = ['0']
 def CurSelet(event):
+    stop()
     widget = event.widget
     selection = widget.curselection()
     picked = widget.get(selection[0])
@@ -40,7 +45,7 @@ listbox.bind('<<ListboxSelect>>',CurSelet)
 listbox.pack(side=LEFT, fill=Y)
 scrollbar = Scrollbar(root)
 scrollbar.pack( side = RIGHT, fill = Y )
-b = Button(root,text="submit")
+b = Button(root,text="Play")
 b.pack(side=BOTTOM)
 canvas = Canvas(root,yscrollcommand = scrollbar.set)
 canvas.pack(fill='both')
